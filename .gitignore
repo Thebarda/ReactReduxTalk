@@ -59,3 +59,8 @@ typings/
 
 # next.js build output
 .next
+
+
+server/db.sqlite3
+.vscode
+front/node_modules
