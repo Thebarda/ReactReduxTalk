@@ -16,33 +16,37 @@ export default class TodoList extends PureComponent {
 			<div className="left-align">
 				<h2>Todo List</h2>
 
-				{todos.map(todo => (
-					<div key={todo.id}>
-						<form action="#">
-							<div>
-								<label>
-									<input
-										type="checkbox"
-										className="filled-in"
-										checked={todo.is_completed}
-										onChange={e => onChangeCompleteTodo(e.target.checked, todo.id)}
-									/>
-									<span>{todo.todo}</span>
-								</label>
-								<a href="#" onClick={() => onDeleteTodo(todo.id)}>
-									<i style={{ marginLeft: '0.2rem' }} className="material-icons">
-										delete
-									</i>
-								</a>
-								<a href="#" onClick={() => this.props.startEditTodo(todo)}>
-									<i style={{ marginLeft: '0.2rem' }} className="material-icons">
-										edit
-									</i>
-								</a>
-							</div>
-						</form>
-					</div>
-				))}
+				{todos.length > 0 ? (
+					todos.map(todo => (
+						<div key={todo.id}>
+							<form action="#">
+								<div>
+									<label>
+										<input
+											type="checkbox"
+											className="filled-in"
+											checked={todo.is_completed}
+											onChange={e => onChangeCompleteTodo(e.target.checked, todo.id)}
+										/>
+										<span>{todo.todo}</span>
+									</label>
+									<a href="#" onClick={() => onDeleteTodo(todo.id)}>
+										<i style={{ marginLeft: '0.2rem' }} className="material-icons">
+											delete
+										</i>
+									</a>
+									<a href="#" onClick={() => this.props.startEditTodo(todo)}>
+										<i style={{ marginLeft: '0.2rem' }} className="material-icons">
+											edit
+										</i>
+									</a>
+								</div>
+							</form>
+						</div>
+					))
+				) : (
+					<h5>There is any todo here</h5>
+				)}
 			</div>
 		)
 	}
