@@ -10,6 +10,7 @@ class TodoListContainer extends PureComponent {
 			getTodos: PropTypes.func.isRequired,
 			updateTodo: PropTypes.func.isRequired,
 			deleteTodo: PropTypes.func.isRequired,
+			startEditTodo: PropTypes.func.isRequired,
 		}).isRequired,
 		pending: PropTypes.bool.isRequired,
 		todos: PropTypes.instanceOf(Array).isRequired,
@@ -22,7 +23,6 @@ class TodoListContainer extends PureComponent {
 
 	onChangeCompleteTodoInner = (complete, todoId) => {
 		const { actions } = this.props
-		console.log('udate')
 		actions.updateTodo(todoId, complete).then(() => {
 			actions.getTodos(false)
 		})
@@ -63,6 +63,7 @@ class TodoListContainer extends PureComponent {
 					todos={todos}
 					onChangeCompleteTodo={this.onChangeCompleteTodoInner}
 					onDeleteTodo={this.onDeleteTodoInner}
+					startEditTodo={todo => this.props.actions.startEditTodo(todo)}
 				/>
 			)
 		}

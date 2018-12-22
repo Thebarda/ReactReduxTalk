@@ -1,8 +1,9 @@
-import { GET_TODOS, ADD_TODO, UPDATE_TODO, DELETE_TODO } from '../actions/todosActionsCreators'
+import { GET_TODOS, ADD_TODO, UPDATE_TODO, DELETE_TODO, START_EDIT_TODO } from '../actions/todosActionsCreators'
 import * as Status from '../actions/status'
 
 const initialState = {
 	todos: [],
+	edit: null,
 	pending: false,
 	pendingCreate: false,
 	error: null,
@@ -49,12 +50,14 @@ const todos = (state = initialState, action) => {
 						...state,
 						pendingCreate: false,
 						errorCreate: null,
+						edit: null,
 					}
 				case Status.ERROR:
 					return {
 						...state,
 						pendingCreate: false,
 						errorCreate: payload,
+						edit: null,
 					}
 				default:
 					return state
@@ -65,6 +68,12 @@ const todos = (state = initialState, action) => {
 					return {
 						...state,
 						error: payload,
+						edit: null,
+					}
+				case Status.SUCCESS:
+					return {
+						...state,
+						edit: null,
 					}
 				default:
 					return state
@@ -78,6 +87,11 @@ const todos = (state = initialState, action) => {
 					}
 				default:
 					return state
+			}
+		case START_EDIT_TODO:
+			return {
+				...state,
+				edit: payload.todo,
 			}
 		default:
 			return state

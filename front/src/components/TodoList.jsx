@@ -6,10 +6,12 @@ export default class TodoList extends PureComponent {
 		todos: PropTypes.instanceOf(Array).isRequired,
 		onChangeCompleteTodo: PropTypes.func.isRequired,
 		onDeleteTodo: PropTypes.func.isRequired,
+		startEditTodo: PropTypes.func.isRequired,
 	}
 
 	render() {
 		const { todos, onChangeCompleteTodo, onDeleteTodo } = this.props
+
 		return (
 			<div className="left-align">
 				<h2>Todo List</h2>
@@ -17,7 +19,7 @@ export default class TodoList extends PureComponent {
 				{todos.map(todo => (
 					<div key={todo.id}>
 						<form action="#">
-							<p>
+							<div>
 								<label>
 									<input
 										type="checkbox"
@@ -26,13 +28,18 @@ export default class TodoList extends PureComponent {
 										onChange={e => onChangeCompleteTodo(e.target.checked, todo.id)}
 									/>
 									<span>{todo.todo}</span>
-									<a href="#" onClick={() => onDeleteTodo(todo.id)}>
-										<i style={{ marginLeft: '0.2rem' }} className="material-icons">
-											delete
-										</i>
-									</a>
 								</label>
-							</p>
+								<a href="#" onClick={() => onDeleteTodo(todo.id)}>
+									<i style={{ marginLeft: '0.2rem' }} className="material-icons">
+										delete
+									</i>
+								</a>
+								<a href="#" onClick={() => this.props.startEditTodo(todo)}>
+									<i style={{ marginLeft: '0.2rem' }} className="material-icons">
+										edit
+									</i>
+								</a>
+							</div>
 						</form>
 					</div>
 				))}
